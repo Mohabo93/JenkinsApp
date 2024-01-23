@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Bygg') {
+            steps {
+                script {
+                    // Gå till arbetsutrymmet (workspace) där Jenkins redan har klonat repo
+                    dir('C:\\Users\\hamod\\OneDrive\\Skrivbord\\NyJenkins\\JenkinsApp') {
+                        // Utför byggnad, ersätt med dina egna byggnadskommandon
+                        sh 'npm install'
+                        sh 'npm run build'
+                    }
+                }
+            }
+        }
+
+        stage('Kör tester') {
+            steps {
+                script {
+                    // Gå till arbetsutrymmet igen
+                    dir('C:\\Users\\hamod\\OneDrive\\Skrivbord\\NyJenkins\\JenkinsApp') {
+                        // Utför tester, ersätt med dina egna testkommandon
+                        sh 'npm test'
+                    }
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    // Gå till arbetsutrymmet igen
+                    dir('C:\\Users\\hamod\\OneDrive\\Skrivbord\\NyJenkins\\JenkinsApp') {
+                        // Utför distributionssteg, ersätt med dina egna distributionskommandon
+                        sh 'npm deploy'
+                    }
+                }
+            }
+        }
+    }
+}
